@@ -7,7 +7,7 @@ import { ScreenWidthContext, FontLoadedContext } from "../../layouts";
 import config from "../../../content/meta/config";
 import Menu from "../Menu";
 
-import avatar from "../../images/jpg/avatar.jpg";
+import avatar from "../../images/app-icons/icon.png";
 
 class Header extends React.Component {
   state = {
@@ -90,11 +90,7 @@ class Header extends React.Component {
               }
             }
 
-            &.homepage {
-              position: absolute;
-              background-color: transparent;
-              height: ${theme.header.height.homepage};
-            }
+            
           }
 
           h1 {
@@ -156,15 +152,8 @@ class Header extends React.Component {
               .logo {
                 border: none;
               }
-
-              :global(a.logoType),
-              h1 {
-                color: ${theme.color.neutral.white};
-              }
-              h2 {
-                color: ${theme.color.neutral.gray.d};
-              }
-            }
+						}
+						
           }
 
           @from-width desktop {
@@ -172,7 +161,6 @@ class Header extends React.Component {
               align-items: center;
               background-color: ${theme.color.neutral.white};
               display: flex;
-              position: absolute;
               top: 0;
               width: 100%;
               justify-content: space-between;
@@ -195,17 +183,7 @@ class Header extends React.Component {
                 h2 {
                   display: none;
                 }
-              }
-
-              &.homepage:not(.fixed) {
-                :global(a.logoType),
-                h1 {
-                  color: ${theme.color.neutral.white};
-                }
-                h2 {
-                  color: ${theme.color.neutral.gray.d};
-                }
-              }
+							}
             }
 
             .header :global(a.logoType) {

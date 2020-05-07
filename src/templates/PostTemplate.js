@@ -19,6 +19,8 @@ const PostTemplate = props => {
     },
     pageContext: { next, prev }
   } = props;
+  const seoData = {...post.frontmatter, ...post.fields}
+  console.log('page template', post, seoData);
 
   return (
     <React.Fragment>
@@ -37,7 +39,7 @@ const PostTemplate = props => {
         )}
       </ThemeContext.Consumer>
 
-      <Seo data={post} facebook={facebook} />
+      <Seo data={seoData} facebook={facebook} />
     </React.Fragment>
   );
 };

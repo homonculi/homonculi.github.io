@@ -15,6 +15,7 @@ const PageTemplate = props => {
       }
     }
   } = props;
+  console.log('page template', page);
 
   return (
     <React.Fragment>

@@ -8,27 +8,32 @@ const Hero = props => {
     subtitle,
     backgrounds,
     theme,
-    ctaContent,
+		ctaContent,
+		overlayColor,
   } = props;
 
   return (
     <React.Fragment>
       <section className="hero">
-        {title && <h1>{title}</h1>}
-        {subtitle && <h3>{subtitle}</h3>}
-        {ctaContent && (
-          <button onClick={onCtaClick} aria-label="scroll">
-            {ctaContent}
-          </button>
-        )}
+				<div className={`hero-bg-overlay ${overlayColor}`}  />
+				<div className="hero-contanet-container">
+					{title && <h1>{title}</h1>}
+					{subtitle && <h3>{subtitle}</h3>}
+					{ctaContent && (
+						<button onClick={onCtaClick} aria-label="scroll">
+							{ctaContent}
+						</button>
+					)}
+				</div>
       </section>
 
       {/* --- STYLES --- */}
       <style jsx>{`
         .hero {
-          align-items: center;
+					align-items: center;
           background: ${theme.hero.background};
-          background-size: cover;
+					background-size: cover;
+					position: relative;
           color: ${theme.text.color.primary.inverse};
           display: flex;
           flex-flow: column nowrap;
@@ -62,8 +67,26 @@ const Hero = props => {
               margin: 0 0 0 ${theme.space.xs};
             }
           }
-        }
+				}
+				
+				h3 {
+					color: ${theme.text.color.primary.inverse || 'white'};
+					text-align: center;
+				}
 
+				.hero-bg-overlay {
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					top: 0;
+					left: 0;
+					background-color: rgba(0,0,0,0.2);
+					z-index: 0;
+				}
+
+				.hero-contanet-container {
+					z-index: 1;
+				}
         button {
           background: ${theme.background.color.brand};
           border: 0;
@@ -105,7 +128,7 @@ const Hero = props => {
 
         @from-width tablet {
           .hero {
-            background-image: url(${backgrounds.tablet});
+            ${backgrounds && `background-image: url(${backgrounds.tablet})`};
           }
 
           h1 {
@@ -120,7 +143,7 @@ const Hero = props => {
 
         @from-width desktop {
           .hero {
-            background-image: url(${backgrounds.desktop});
+            ${backgrounds && `background-image: url(${backgrounds.desktop})`};
           }
 
           h1 {
@@ -140,8 +163,9 @@ const Hero = props => {
 Hero.propTypes = {
   onCtaClick: PropTypes.func,
   ctaContent: PropTypes.node,
-  backgrounds: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
+  backgrounds: PropTypes.object,
+	theme: PropTypes.object.isRequired,
+	overlayColor: PropTypes.string,
 };
 
 export default Hero;

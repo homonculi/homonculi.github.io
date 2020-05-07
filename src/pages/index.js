@@ -5,6 +5,7 @@ import { FaArrowDown } from "react-icons/fa/";
 
 import { ThemeContext } from "../layouts";
 import Blog from "../components/Blog";
+import CardList from "../components/CardList";
 import Hero from "../components/Hero";
 import Seo from "../components/Seo";
 
@@ -21,6 +22,8 @@ class IndexPage extends React.Component {
   render() {
     const {
       data: {
+				yeppas,
+				yeppaImgs,
         posts: { edges: posts = [] },
         bgDesktop: {
           resize: { src: desktop }
@@ -37,21 +40,45 @@ class IndexPage extends React.Component {
       }
     } = this.props;
 
+		console.log('yeppas', yeppas, yeppaImgs);
     const backgrounds = {
       desktop,
       tablet,
       mobile
-    };
+		};
+		
+		const yeppaCards = yeppas.edges.map((y) => {
+			const {
+				name,
+				slug,
+				bio,
+				permalink,
+				categories,
+				cardImage,
+			} = y.node;
+			const image = yeppaImgs.edges.filter(img =>
+					img.node.relativePath === cardImage)[0];
+			// format to CardItem props
+			console.log('image,', y, cardImage, image, yeppaImgs.edges.filter(img =>img.node.relativePath === cardImage));
+			return {
+				title: name,
+				slug: permalink || slug,
+				subtitle: bio,
+				categories,
+				image: image ? image.node.childImageSharp.fluid : null,
+			}
+		})
 
     return (
-      <React.Fragment>
+      <>
+        <Seo facebook={facebook} />
         <ThemeContext.Consumer>
           {theme => (
             <Hero
               onCtaClick={this.scrollToContent}
               backgrounds={backgrounds}
               theme={theme}
-              title="한국에서 가장 섹시한 소년"
+              title="한국에서 가장 예뻐 사람들"
               ctaContent={FaArrowDown()}
             />
           )}
@@ -60,18 +87,10 @@ class IndexPage extends React.Component {
         <hr ref={this.separator} />
 
         <ThemeContext.Consumer>
-          {theme => <Blog posts={posts} theme={theme} />}
+          {/* {theme => <Blog posts={posts} theme={theme} />} */}
+					{theme => <CardList items={yeppaCards} theme={theme} />}
         </ThemeContext.Consumer>
-
-        <Seo facebook={facebook} />
-
-        <style jsx>{`
-          hr {
-            margin: 0;
-            border: 0;
-          }
-        `}</style>
-      </React.Fragment>
+      </>
     );
   }
 }
@@ -85,6 +104,36 @@ export default IndexPage;
 //eslint-disable-next-line no-undef
 export const query = graphql`
   query IndexQuery {
+		yeppas: allYeppasYaml {
+			edges {
+				node{
+					name,
+					slug,
+					bio,
+					permalink,
+					categories,
+					cardImage
+				}
+			}
+		}
+
+		yeppaImgs: allFile(
+      filter: {
+        sourceInstanceName: {eq: "images" }
+        relativePath: { regex: "/yeppas/" }
+      } ) {
+      edges {
+        node {
+          relativePath
+          childImageSharp {
+            fluid(maxWidth: 800, quality: 100) {
+              ...GatsbyImageSharpFluid_withWebp_tracedSVG
+            }
+          }
+        }
+      }
+		}
+
     posts: allMarkdownRemark(
       filter: { fileAbsolutePath: { regex: "//posts/[0-9]+.*--/" } }
       sort: { fields: [fields___prefix], order: DESC }

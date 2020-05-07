@@ -8,8 +8,8 @@ module.exports = {
   siteLanguage: "en",
 
   /* author */
-  authorName: "키바",
-  authorTwitterAccount: "kibagateaux",
+  orgName: "키바",
+  orgTwitterAccount: "kibagateaux",
 
   /* info */
   headerTitle: "존나 예뻐",
@@ -31,7 +31,7 @@ module.exports = {
   gravatarImgMd5: "",
 
   // social
-  authorSocialLinks: [
+  orgSocialLinks: [
     { name: "github", url: "https://github.com/homonculi" },
     { name: "twitter", url: "https://twitter.com/kibagateaux" },
     { name: "instagram", url: "http://facebook.com/thatbigafro" }

@@ -97,15 +97,16 @@ exports.createPages = ({ graphql, actions }) => {
             name,
             categories,
           } = node;
-          
-          console.log('making yeppa page for boi: ', node.name, _.find(categories, (c) => c === '씨발'));
+          const slug = _.kebabCase(name);
+          const imageDirectory = `/yeppas/${slug}/`;
           const rootPath = _.find(categories, (c) => c === '씨발') ? '씨발' : '보이';
           createPage({
-            path: `/${rootPath}/${_.kebabCase(node.name)}/`,
+            path: `/${rootPath}/${slug}/`,
             component: yeppaTemplate,
             context: {
               name,
-            }
+              imageDirectory,
+            },
           });
         });
 

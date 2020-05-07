@@ -5,16 +5,15 @@ import config from "../../../content/meta/config";
 
 const Seo = props => {
   const { data, facebook } = props;
-  // TODO make this non reliant on frontmatter
-  const postTitle = ((data || {}).frontmatter || {}).title;
-  const postDescription = ((data || {}).frontmatter || {}).description;
-  const postCover = ((data || {}).frontmatter || {}).cover;
-  const postSlug = ((data || {}).fields || {}).slug;
+  const Title = (data || {}).title;
+  const Description = (data || {}).description;
+  const Cover = (data || {}).cover; // TODO make puts src.jpg url not object
+  const Slug = (data || {}).slug;
 
-  const title = postTitle ? `${postTitle} - ${config.shortSiteTitle}` : config.siteTitle;
-  const description = postDescription ? postDescription : config.siteDescription;
-  const image = postCover ? postCover : config.siteImage;
-  const url = config.siteUrl + config.pathPrefix + postSlug;
+  const title = Title ? `${Title} - ${config.shortSiteTitle}` : config.siteTitle;
+  const description = Description ? Description : config.siteDescription;
+  const image = Cover ? Cover : config.siteImage;
+  const url = config.siteUrl + config.pathPrefix + Slug;
 
   return (
     <Helmet
@@ -32,12 +31,12 @@ const Seo = props => {
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       <meta property="og:type" content="website" />
-      <meta property="fb:app_id" content={facebook.appId} />
+      {/* <meta property="fb:app_id" content={facebook.appId} /> */}
       {/* Twitter Card tags */}
       <meta name="twitter:card" content="summary" />
       <meta
         name="twitter:creator"
-        content={config.authorTwitterAccount ? config.authorTwitterAccount : ""}
+        content={config.orgTwitterAccount ? config.orgTwitterAccount : ""}
       />
     </Helmet>
   );
@@ -45,7 +44,7 @@ const Seo = props => {
 
 Seo.propTypes = {
   data: PropTypes.object,
-  facebook: PropTypes.object.isRequired
+  // facebook: PropTypes.object.isRequired,
 };
 
 export default Seo;

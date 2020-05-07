@@ -1,7 +1,12 @@
 name: Winter
+slug: winter
 bio: "The most sexiest man in the world"
 social:
   instagram: _winterru
+permalink: /씨발/winter
 categories:
   - 씨발
   - bae
+# Must be full relative path from /images/ includign file extension
+cardImage: yeppas/winter/winter0.jpg
+heroImage: yeppas/winter/winter0.jpg
