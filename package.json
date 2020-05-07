@@ -8,8 +8,8 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "heroku-postbuild": "gatsby build",
     "dev": "gatsby develop",
+    "deploy": "gatsby build && gh-pages -d public  -b master",
     "devhost": "gatsby develop --host 192.168.0.112",
     "format": "prettier --write 'src/**/*.js'",
     "lint-errors": "eslint src/**/*.{js,jsx} --quiet",
@@ -90,6 +90,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.10.0",
+    "gh-pages": "^2.2.0",
     "json-loader": "^0.5.7",
     "postcss": "^7.0.0",
     "postcss-cli": "^5.0.1",
