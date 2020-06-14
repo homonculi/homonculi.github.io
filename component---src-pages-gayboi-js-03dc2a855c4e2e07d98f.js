@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[9],{296:function(n,e,t){"use strict";t.r(e);t(1);var u=t(0),a=t.n(u);t(16),t(157),t(525),t(526),t(309);e.default=function(n){return a.a.createElement("h1",null," Much pretty bois. Many makeups ")}}}]);
+//# sourceMappingURL=component---src-pages-gayboi-js-03dc2a855c4e2e07d98f.js.map

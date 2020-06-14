@@ -1,0 +1,1 @@
+{"errors":[{"message":"Invalid flags supplied to RegExp constructor '$slug'","locations":[{"line":12,"column":3}],"path":["images"]}],"data":{"boi":{"name":"Winter","bio":"The most sexiest man in the world","categories":["씨발","bae"],"social":{"instagram":"_winterru"}},"images":null},"pageContext":{"slug":"winter"}}
